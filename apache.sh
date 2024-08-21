@@ -1,5 +1,5 @@
 #!/bin/bash
-yum update && yum install httpd -y
+yum update -y && yum install httpd -y
 systemctl enable httpd
 systemctl start httpd
 instanceId=$(curl http://169.254.169.254/latest/meta-data/instance-id)
