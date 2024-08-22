@@ -1,20 +1,22 @@
-variable "ports" {
-  default = [80, 443, 22, 53]
-}
-
 resource "aws_security_group" "web_access" {
-  name        = "demo-sg-dynamic"
-  description = "Dynamic Blocks for Ingress"
+  name        = "demo-map"
+  description = "Security Group - Webaccess"
 
   dynamic "ingress" {
-    for_each = var.ports
+    for_each = var.sg_config
     content {
-      description = "description ${ingress.key}"
-      from_port   = ingress.value
-      to_port     = ingress.value
-      protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      description = ingress.value.description
+      from_port   = ingress.value.port
+      to_port     = ingress.value.port
+      protocol    = ingress.value.protocol
+      cidr_blocks = ingress.value.cidr_blocks
     }
   }
 
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
