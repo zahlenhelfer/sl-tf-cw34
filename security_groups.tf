@@ -1,6 +1,6 @@
 resource "aws_security_group" "web_access" {
-  name        = "demo-map"
-  description = "Security Group - Webaccess"
+  name        = "web-server-access"
+  description = "Security Group - Webserver-Access"
 
   dynamic "ingress" {
     for_each = var.sg_config
@@ -16,7 +16,7 @@ resource "aws_security_group" "web_access" {
   egress {
     from_port   = 0
     to_port     = 0
-    protocol    = "-1"
+    protocol    = -1
     cidr_blocks = ["0.0.0.0/0"]
   }
 }

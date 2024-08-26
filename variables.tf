@@ -17,7 +17,7 @@ variable "sg_config" {
       port        = 22,
       description = "SSH Access",
       protocol    = "tcp",
-      cidr_blocks = ["10.0.0.0/16"],
+      cidr_blocks = ["0.0.0.0/0"],
     }
   }
 }

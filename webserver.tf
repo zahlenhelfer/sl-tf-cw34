@@ -6,12 +6,6 @@ resource "aws_instance" "web" {
   user_data       = file("apache.sh")
   monitoring      = true
 
-  metadata_options {
-    http_tokens                 = "optional"
-    http_put_response_hop_limit = 1
-    http_endpoint               = "enabled"
-  }
-
   tags = {
     Name = "App Server ${count.index + 1}"
   }
